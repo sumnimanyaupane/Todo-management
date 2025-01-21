@@ -25,48 +25,46 @@ public class SpringSecurityConfig {
     private UserDetailsService userDetailsService;
 
     @Bean
-    public static PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-   @Bean
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-               .authorizeHttpRequests((authorize) -> {
-
-//                   role based authorization
-//                   authorize.requestMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN");
-//                   authorize.requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN");
-//                   authorize.requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN");
-//                   authorize.requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("ADMIN","USER");
-////                   authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll();
-//                   authorize.requestMatchers(HttpMethod.PATCH,"/api/**").hasAnyRole("ADMIN","USER");
-
-                   authorize.anyRequest().authenticated();
-               }).httpBasic(Customizer.withDefaults());
-       return http.build();
+                .authorizeHttpRequests((authorize) -> {
+//                    authorize.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
+//                    authorize.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
+//                    authorize.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
+//                    authorize.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "USER");
+//                    authorize.requestMatchers(HttpMethod.PATCH, "/api/**").hasAnyRole("ADMIN", "USER");
+//                    authorize.requestMatchers(HttpMethod.GET, "/api/**").permitAll();
+                    authorize.anyRequest().authenticated();
+                }).httpBasic(Customizer.withDefaults());
+        return http.build();
     }
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-//   @Bean
-//    public UserDetailsService userDetailsService() {
-//       UserDetails shova = User.builder()
-//               .username("shova")
-//               .password(passwordEncoder().encode("shova123"))
-//               .roles("USER")
-//               .build();
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//
+//        UserDetails ramesh = User.builder()
+//                .username("ramesh")
+//                .password(passwordEncoder().encode("password"))
+//                .roles("USER")
+//                .build();
 //
 //        UserDetails admin = User.builder()
 //                .username("admin")
-//                .password(passwordEncoder().encode("admin123"))
+//                .password(passwordEncoder().encode("admin"))
 //                .roles("ADMIN")
 //                .build();
 //
-//        return new InMemoryUserDetailsManager(shova, admin);
+//        return new InMemoryUserDetailsManager(ramesh, admin);
 //    }
 }

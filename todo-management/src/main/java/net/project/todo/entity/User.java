@@ -8,26 +8,24 @@ import lombok.Setter;
 
 import java.util.Set;
 
-@Getter
+
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
-
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -36,5 +34,4 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
-
 }

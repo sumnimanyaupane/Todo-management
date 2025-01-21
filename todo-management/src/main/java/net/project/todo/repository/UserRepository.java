@@ -1,7 +1,7 @@
 package net.project.todo.repository;
 
+import net.project.todo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.Optional;
 
